@@ -1,0 +1,97 @@
+name: Build PlushOS ISO
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc || true
+      - name: Unpack PlushOS builder
+        run: |
+          base64 -d <<'B64' | tar xz
+          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
+          B64
+      - name: Build ISO
+        run: |
+          set -o pipefail
+          docker run --rm --privileged -e ARCH=arm64 -e DEBIAN_FRONTEND=noninteractive \
+            -v "$PWD/plushos-iso-builder:/work" -w /work debian:bookworm \
+            bash -c "apt-get update && apt-get install -y ca-certificates && ./build.sh" 2>&1 | tee plushos-iso-builder/docker.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: plushos-arm64
+          path: |
+            plushos-iso-builder/*.iso
+            plushos-iso-builder/build.log
+            plushos-iso-builder/docker.log
